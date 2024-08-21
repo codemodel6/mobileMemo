@@ -1,13 +1,14 @@
 import React from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
-import {globalDisplay} from '../assets/styles/global/globalDisplay';
+import {ScrollView, StyleSheet} from 'react-native';
+import MemoItem from '../components/memo/MemoItem';
 
 const MemoListPage = () => {
   return (
     <ScrollView
       style={styles.memoListPageWrapper}
       contentContainerStyle={styles.memoListPageDisplay}>
-      <View />
+      <MemoItem />
+      <MemoItem />
     </ScrollView>
   );
 };
@@ -16,9 +17,11 @@ const styles = StyleSheet.create({
   memoListPageWrapper: {
     flex: 1,
     backgroundColor: '#412452',
+    paddingLeft: '5%',
+    paddingRight: '5%',
   },
   memoListPageDisplay: {
-    ...globalDisplay.betweenRow,
+    flexDirection: 'column',
   },
 });
 
