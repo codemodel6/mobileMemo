@@ -1,6 +1,6 @@
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import {globalDisplay} from '../../assets/styles/global/globalDisplay';
+import {globalDisplay} from '../assets/styles/global/globalDisplay';
 
 const MemoListPage = () => {
   return (

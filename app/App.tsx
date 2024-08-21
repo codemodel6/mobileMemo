@@ -3,7 +3,7 @@ import {SafeAreaView, useColorScheme} from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import TheHeader from './components/organism/TheHeader';
-import MemoList from './components/page/MemoListPage';
+import MemoList from './page/MemoListPage';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
