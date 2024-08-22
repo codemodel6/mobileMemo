@@ -1,22 +1,69 @@
-import React from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import React, {ChangeEvent, useEffect, useState} from 'react';
+import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
 import {globalDisplay} from '../../assets/styles/global/globalDisplay';
 import MemoFormTool from './MemoFormTool';
 
 const MemoForm = () => {
+  interface MemoFormDataProps {
+    title: string;
+    date: string;
+    contents: string;
+  }
+
+  // Form의 데이터 객체 state
+  const [memoFormData, setMemoFormData] = useState<MemoFormDataProps>({
+    title: '',
+    date: '',
+    contents: '',
+  });
+
+  /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  - 훅 기능 : 현재 날짜를 가져온 후 state에 넣어준다
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+  useEffect(() => {
+    // 날짜 생성 및 YYYY-MM-DD 형식 변환
+    const currentDate = new Date().toISOString().split('T')[0];
+
+    // 데이터 객체 state에 date 값에 넣어준다
+    setMemoFormData(prevData => ({
+      ...prevData,
+      date: currentDate,
+    }));
+  }, []);
+
+  /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  - 함수 기능 : Form 데이터 객체 수정 (keyof interface는 interface의 key 값만 넣을 수 있는 타입)
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+  const handleMemoFormData = (name: keyof MemoFormDataProps, value: string) => {
+    setMemoFormData(prevData => ({
+      ...prevData, // 이전 데이터
+      [name]: value, // 이름 키로 값 변경
+    }));
+  };
+
   return (
     <ScrollView
       style={styles.memoFormWrapper}
       contentContainerStyle={styles.memoFormContainer}>
       <View style={styles.formTitleBlock}>
-        <Text style={styles.formTitleText}>제목</Text>
+        <TextInput
+          style={styles.formTitleText}
+          placeholder="제목"
+          value={memoFormData.title}
+          onChangeText={text => handleMemoFormData('title', text)}
+        />
         <MemoFormTool />
       </View>
       <View style={styles.formDateBlock}>
-        <Text style={styles.formDateText}>2024-08-22</Text>
+        <Text style={styles.formDateText}>{memoFormData.date}</Text>
       </View>
       <View style={styles.formContentsBlock}>
-        <Text style={styles.formContentsText}>내용 없음</Text>
+        <TextInput
+          style={styles.formContentsText}
+          placeholder="내용을 입력해주세요"
+          value={memoFormData.contents}
+          onChangeText={text => handleMemoFormData('contents', text)}
+        />
       </View>
     </ScrollView>
   );
