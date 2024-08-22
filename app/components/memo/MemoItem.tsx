@@ -1,17 +1,22 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {globalDisplay} from '../../assets/styles/global/globalDisplay';
+import {memoListProps} from '../../data/memoListData';
 
-const MemoItem = () => {
+interface MemoItemProps {
+  it: memoListProps;
+}
+
+const MemoItem: React.FC<MemoItemProps> = ({it}) => {
   return (
     <View style={styles.memoItemWrapper}>
       <View style={styles.itemDataBlock}>
         <View style={styles.itemInfoBlock}>
-          <Text style={styles.itemTitleText}>제목</Text>
-          <Text style={styles.itemDateText}>2024-08-21</Text>
+          <Text style={styles.itemTitleText}>{it.title}</Text>
+          <Text style={styles.itemDateText}>{it.updatedAt}</Text>
         </View>
         <View style={styles.itemContentsBlock}>
-          <Text style={styles.itemContents}>내용</Text>
+          <Text style={styles.itemContents}>{it.description}</Text>
         </View>
       </View>
       <View style={styles.itememoDeleteBlock}>

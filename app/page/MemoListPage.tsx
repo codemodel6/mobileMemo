@@ -2,14 +2,22 @@ import React from 'react';
 import {ScrollView, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import MemoItem from '../components/memo/MemoItem';
 import {globalDisplay} from '../assets/styles/global/globalDisplay';
+import {useSelector} from 'react-redux';
+import {RootState} from '../redux/store';
 
 const MemoListPage = () => {
+  // 리덕스의 초기 값
+  const serverMemoListData = useSelector(
+    (state: RootState) => state.memoReducer,
+  );
+
   return (
     <ScrollView
       style={styles.memoListPageWrapper}
       contentContainerStyle={styles.memoListPageDisplay}>
-      <MemoItem />
-      <MemoItem />
+      {serverMemoListData.reduxMemoListData.map(it => (
+        <MemoItem key={it.keyNumber} it={it} />
+      ))}
       <TouchableOpacity style={styles.memoListPageAddButton}>
         <Text style={styles.memoListPageAddButtonText}>추가</Text>
       </TouchableOpacity>
