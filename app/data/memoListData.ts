@@ -1,4 +1,4 @@
-interface memoListProps {
+export interface memoListProps {
   // unique string 값
   id: string;
   // memo 제목

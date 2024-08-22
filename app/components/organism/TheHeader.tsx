@@ -1,14 +1,25 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {globalDisplay} from '../../assets/styles/global/globalDisplay';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../redux/store';
 
 const TheHeader = () => {
+  // 리덕스의 초기 값
+  const serverMemoListData = useSelector(
+    (state: RootState) => state.memoReducer,
+  );
+
+  const memoListDataLength = serverMemoListData.reduxMemoListData.length;
+
+  console.log('--------->', serverMemoListData);
+
   return (
     <View style={styles.headerWrapper}>
       <TouchableOpacity style={styles.headerBackButton}>
         <Text style={styles.headerBackButtonText}>뒤</Text>
       </TouchableOpacity>
-      <Text style={styles.headerTitle}>안녕하세요</Text>
+      <Text style={styles.headerTitle}>메모리스트({memoListDataLength})</Text>
       <TouchableOpacity style={styles.headerSearchButton}>
         <Text style={styles.headerSearchButtonText}>돋</Text>
       </TouchableOpacity>

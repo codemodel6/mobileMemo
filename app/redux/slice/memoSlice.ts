@@ -4,11 +4,11 @@ import {memoListData} from '../../data/memoListData';
 export const memoReducer = createSlice({
   name: 'memoReducer',
   initialState: {
-    serverMemoListData: memoListData,
+    reduxMemoListData: memoListData,
   },
   reducers: {
     addMemoList: state => {
-      console.log(state.serverMemoListData);
+      console.log(state.reduxMemoListData);
     },
   },
 });
