@@ -1,12 +1,30 @@
 import React from 'react';
 import {SafeAreaView, useColorScheme} from 'react-native';
-
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import TheHeader from './components/organism/TheHeader';
-import MemoList from './page/MemoListPage';
-import MemoForm from './components/memo/MemoForm';
+import MemoListPage from './page/MemoListPage';
 import {Provider} from 'react-redux';
 import store from './redux/store';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
+import MemoForm from './components/memo/MemoForm';
+
+// export type StackParamList = {
+//   MemoListPage: undefined;
+//   MemoForm: {
+//     id: number;
+//     title: string;
+//     overview: string;
+//     voteCount: number;
+//   };
+// };
+
+export type StackParamList = {
+  MemoListPage: undefined;
+  MemoForm: undefined;
+};
+
+const Stack = createNativeStackNavigator<StackParamList>();
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -19,9 +37,20 @@ function App(): React.JSX.Element {
   return (
     <Provider store={store}>
       <SafeAreaView style={backgroundStyle}>
-        <TheHeader />
-        {/* <MemoList /> */}
-        <MemoForm />
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="MemoListPage"
+              component={MemoListPage}
+              options={{header: () => <TheHeader />}}
+            />
+            <Stack.Screen
+              name="MemoForm"
+              component={MemoForm}
+              options={{header: () => <TheHeader />}}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
       </SafeAreaView>
     </Provider>
   );

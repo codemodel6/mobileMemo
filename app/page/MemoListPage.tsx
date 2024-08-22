@@ -4,12 +4,25 @@ import MemoItem from '../components/memo/MemoItem';
 import {globalDisplay} from '../assets/styles/global/globalDisplay';
 import {useSelector} from 'react-redux';
 import {RootState} from '../redux/store';
+import {useNavigation} from '@react-navigation/native';
+import {StackParamList} from '../App';
+import {NativeStackScreenProps} from 'react-native-screens/lib/typescript/native-stack/types';
 
 const MemoListPage = () => {
   // 리덕스의 초기 값
   const serverMemoListData = useSelector(
     (state: RootState) => state.memoReducer,
   );
+  type MemoFormProps = NativeStackScreenProps<StackParamList, 'MemoForm'>;
+
+  const navigation = useNavigation<MemoFormProps>();
+
+  /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  - 함수 기능 : 메모리스트에 메모 추가를 위해 메모 추가 페이지로 이동
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+  const handleNavigate = () => {
+    navigation.navigate('MemoForm', {});
+  };
 
   return (
     <ScrollView
@@ -18,7 +31,9 @@ const MemoListPage = () => {
       {serverMemoListData.reduxMemoListData.map(it => (
         <MemoItem key={it.keyNumber} it={it} />
       ))}
-      <TouchableOpacity style={styles.memoListPageAddButton}>
+      <TouchableOpacity
+        style={styles.memoListPageAddButton}
+        onPress={handleNavigate}>
         <Text style={styles.memoListPageAddButtonText}>추가</Text>
       </TouchableOpacity>
     </ScrollView>
