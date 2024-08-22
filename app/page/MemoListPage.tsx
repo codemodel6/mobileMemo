@@ -16,7 +16,7 @@ const MemoListPage = () => {
 const styles = StyleSheet.create({
   memoListPageWrapper: {
     flex: 1,
-    backgroundColor: '#412452',
+    backgroundColor: '#ca3623',
     paddingLeft: '5%',
     paddingRight: '5%',
   },
