@@ -10,9 +10,7 @@ const TheHeader = () => {
     (state: RootState) => state.memoReducer,
   );
 
-  const memoListDataLength = serverMemoListData.reduxMemoListData.length;
-
-  console.log('--------->', serverMemoListData);
+  const memoListDataLength = serverMemoListData.reduxMemoListData.length; // reduxMemoListData 배열의 길이
 
   return (
     <View style={styles.headerWrapper}>

@@ -1,6 +1,7 @@
 import React from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import MemoItem from '../components/memo/MemoItem';
+import {globalDisplay} from '../assets/styles/global/globalDisplay';
 
 const MemoListPage = () => {
   return (
@@ -9,6 +10,9 @@ const MemoListPage = () => {
       contentContainerStyle={styles.memoListPageDisplay}>
       <MemoItem />
       <MemoItem />
+      <TouchableOpacity style={styles.memoListPageAddButton}>
+        <Text style={styles.memoListPageAddButtonText}>추가</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 };
@@ -22,6 +26,17 @@ const styles = StyleSheet.create({
   },
   memoListPageDisplay: {
     flexDirection: 'column',
+    alignItems: 'center',
+  },
+  memoListPageAddButton: {
+    ...globalDisplay.centerRow,
+    height: 40,
+    width: '70%',
+    backgroundColor: '#000000',
+  },
+  memoListPageAddButtonText: {
+    color: '#ffffff',
+    fontSize: 20,
   },
 });
 
