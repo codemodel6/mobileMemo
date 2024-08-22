@@ -5,6 +5,8 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import TheHeader from './components/organism/TheHeader';
 import MemoList from './page/MemoListPage';
 import MemoForm from './components/memo/MemoForm';
+import {Provider} from 'react-redux';
+import store from './redux/store';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -15,11 +17,13 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <TheHeader />
-      <MemoList />
-      {/* <MemoForm /> */}
-    </SafeAreaView>
+    <Provider store={store}>
+      <SafeAreaView style={backgroundStyle}>
+        <TheHeader />
+        {/* <MemoList /> */}
+        <MemoForm />
+      </SafeAreaView>
+    </Provider>
   );
 }
 
