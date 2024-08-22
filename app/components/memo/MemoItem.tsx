@@ -32,10 +32,9 @@ const styles = StyleSheet.create({
   memoItemWrapper: {
     ...globalDisplay.betweenRow,
     height: 100,
-    backgroundColor: '#d1fd0a',
-    paddingTop: '5%',
-    borderBottomWidth: 2,
-    borderBottomColor: 'black',
+    // backgroundColor: '#d1fd0a',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ced4da',
   },
 
   itemDataBlock: {
@@ -44,36 +43,42 @@ const styles = StyleSheet.create({
   },
 
   itemInfoBlock: {
+    marginTop: '5%',
+    marginBottom: '3%',
     flexDirection: 'row',
     alignItems: 'flex-end',
+    justifyContent: 'space-between',
     width: '100%',
-    backgroundColor: '#124124',
+    // backgroundColor: '#124124',
   },
 
   itemTitleText: {
     fontWeight: 'bold',
     fontSize: 20,
     marginRight: 10,
+    color: '#000000',
   },
+
   itemDateText: {
-    fontSize: 15,
+    marginRight: '3%',
+    fontSize: 12,
   },
 
   itemContentsBlock: {
     flex: 1,
     paddingTop: '1%',
     width: '100%',
-    backgroundColor: '#288096',
+    // backgroundColor: '#288096',
   },
 
   itemContents: {
-    fontSize: 18,
+    fontSize: 15,
   },
 
   itememoDeleteBlock: {
     height: '100%',
     width: '10%',
-    backgroundColor: '#b33636',
+    // backgroundColor: '#b33636',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -81,7 +86,6 @@ const styles = StyleSheet.create({
   itemDeleteButton: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ffffff',
     width: 23,
     height: 23,
   },
