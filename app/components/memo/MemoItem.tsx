@@ -1,10 +1,10 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {globalDisplay} from '../../assets/styles/global/globalDisplay';
-import {memoListProps} from '../../data/memoListData';
+import {MemoListProps} from '../../data/memoListData';
 
 interface MemoItemProps {
-  it: memoListProps;
+  it: MemoListProps;
 }
 
 const MemoItem: React.FC<MemoItemProps> = ({it}) => {

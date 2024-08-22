@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
 import {globalDisplay} from '../../assets/styles/global/globalDisplay';
 import MemoFormTool from './MemoFormTool';

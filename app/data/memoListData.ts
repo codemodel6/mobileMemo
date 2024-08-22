@@ -1,4 +1,4 @@
-export interface memoListProps {
+export interface MemoListProps {
   // unique string 값
   id: string;
   // memo 제목
@@ -13,7 +13,7 @@ export interface memoListProps {
   keyNumber: number;
 }
 
-export const memoListData: memoListProps[] = [
+export const memoListData: MemoListProps[] = [
   {
     id: 'AMIFE-6AEM-EFIAM-MEIFE5',
     title: 'memo의 제목입니다',
