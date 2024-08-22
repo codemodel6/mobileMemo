@@ -17,8 +17,8 @@ function App(): React.JSX.Element {
   return (
     <SafeAreaView style={backgroundStyle}>
       <TheHeader />
-      {/* <MemoList /> */}
-      <MemoForm />
+      <MemoList />
+      {/* <MemoForm /> */}
     </SafeAreaView>
   );
 }

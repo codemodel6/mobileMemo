@@ -5,16 +5,16 @@ import {globalDisplay} from '../../assets/styles/global/globalDisplay';
 const MemoItem = () => {
   return (
     <View style={styles.memoItemWrapper}>
-      <View style={styles.itemDataWrapper}>
-        <View style={styles.itemInfoWrapper}>
-          <Text style={styles.itemTitle}>제목</Text>
-          <Text style={styles.itemDate}>2024-08-21</Text>
+      <View style={styles.itemDataBlock}>
+        <View style={styles.itemInfoBlock}>
+          <Text style={styles.itemTitleText}>제목</Text>
+          <Text style={styles.itemDateText}>2024-08-21</Text>
         </View>
-        <View style={styles.memoItemContents}>
+        <View style={styles.itemContentsBlock}>
           <Text style={styles.itemContents}>내용</Text>
         </View>
       </View>
-      <View style={styles.memoDeleteWrapper}>
+      <View style={styles.itememoDeleteBlock}>
         <TouchableOpacity style={styles.itemDeleteButton}>
           <Text style={styles.itemDeleteButtonText}>X</Text>
         </TouchableOpacity>
@@ -33,28 +33,28 @@ const styles = StyleSheet.create({
     borderBottomColor: 'black',
   },
 
-  itemDataWrapper: {
+  itemDataBlock: {
     height: '100%',
     width: '90%',
   },
 
-  itemInfoWrapper: {
+  itemInfoBlock: {
     flexDirection: 'row',
     alignItems: 'flex-end',
     width: '100%',
     backgroundColor: '#124124',
   },
 
-  itemTitle: {
+  itemTitleText: {
     fontWeight: 'bold',
     fontSize: 20,
     marginRight: 10,
   },
-  itemDate: {
+  itemDateText: {
     fontSize: 15,
   },
 
-  memoItemContents: {
+  itemContentsBlock: {
     flex: 1,
     paddingTop: '1%',
     width: '100%',
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 
-  memoDeleteWrapper: {
+  itememoDeleteBlock: {
     height: '100%',
     width: '10%',
     backgroundColor: '#b33636',

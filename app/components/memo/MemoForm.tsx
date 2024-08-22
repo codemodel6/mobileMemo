@@ -8,15 +8,15 @@ const MemoForm = () => {
     <ScrollView
       style={styles.memoFormWrapper}
       contentContainerStyle={styles.memoFormContainer}>
-      <View style={styles.formTitleWrapper}>
+      <View style={styles.formTitleBlock}>
         <Text style={styles.formTitleText}>제목</Text>
         <MemoFormTool />
       </View>
-      <View style={styles.formDateWrapper}>
+      <View style={styles.formDateBlock}>
         <Text style={styles.formDateText}>2024-08-22</Text>
       </View>
-      <View style={styles.formContentsWrapper}>
-        <Text style={styles.formContentsText}>2024-08-22</Text>
+      <View style={styles.formContentsBlock}>
+        <Text style={styles.formContentsText}>내용 없음</Text>
       </View>
     </ScrollView>
   );
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 
-  formTitleWrapper: {
+  formTitleBlock: {
     ...globalDisplay.betweenRow,
     width: '100%',
     height: 50,
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#20c2db',
   },
 
-  formDateWrapper: {
+  formDateBlock: {
     justifyContent: 'center',
     alignItems: 'flex-end',
     width: '100%',
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
 
-  formContentsWrapper: {
+  formContentsBlock: {
     flex: 1,
     width: '100%',
     backgroundColor: '#77d215',
