@@ -8,23 +8,9 @@ import store from './redux/store';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import MemoForm from './components/memo/MemoForm';
+import {RootStackParamList} from './navigation/type';
 
-// export type StackParamList = {
-//   MemoListPage: undefined;
-//   MemoForm: {
-//     id: number;
-//     title: string;
-//     overview: string;
-//     voteCount: number;
-//   };
-// };
-
-export type StackParamList = {
-  MemoListPage: undefined;
-  MemoForm: undefined;
-};
-
-const Stack = createNativeStackNavigator<StackParamList>();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
