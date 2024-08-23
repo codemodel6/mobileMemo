@@ -1,11 +1,11 @@
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {globalDisplay} from '../../assets/styles/global/globalDisplay';
-import {MemoFormDataProps} from './MemoForm';
 import {useDispatch} from 'react-redux';
-import {deleteMemoList} from '../../redux/slice/memoSlice';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {globalDisplay} from '../../assets/styles/global/globalDisplay';
 import {RootStackParamList} from '../../navigation/type';
+import {deleteMemoList, updateMemoList} from '../../redux/slice/memoSlice';
+import {MemoFormDataProps} from './MemoForm';
 
 interface FormToolProps {
   toggle: boolean;
@@ -19,7 +19,6 @@ interface FormToolProps {
 const MemoFormTool: React.FC<FormToolProps> = ({
   toggle,
   setToggle,
-  id,
   memoFormData,
   setMemoFormData,
   initialMemoFormData,
@@ -32,6 +31,14 @@ const MemoFormTool: React.FC<FormToolProps> = ({
   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
   const handleToggle = () => {
     setToggle(!toggle);
+  };
+
+  /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  - 함수 : serverMemoListData에 id에 맞는 데이터 제거
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+  const handleUpdateForm = (memoFormData: MemoFormDataProps) => {
+    dispatch(updateMemoList(memoFormData)); // 리덕스 함수에 id 전달
+    // navigation.navigate('MemoListPage'); // 메모리스트 이동
   };
 
   /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -59,13 +66,15 @@ const MemoFormTool: React.FC<FormToolProps> = ({
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.toolButton}
-            onPress={() => handleDeleteForm(id)}>
+            onPress={() => handleDeleteForm(memoFormData.id)}>
             <Text style={styles.toolButtonText}>삭제</Text>
           </TouchableOpacity>
         </View>
       ) : (
         <View style={styles.MemoFormToolBlock}>
-          <TouchableOpacity style={styles.toolButton} onPress={handleToggle}>
+          <TouchableOpacity
+            style={styles.toolButton}
+            onPress={() => handleUpdateForm(memoFormData)}>
             <Text style={styles.toolButtonText}>수정</Text>
           </TouchableOpacity>
           <TouchableOpacity

@@ -1,4 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {MemoFormDataProps} from '../../components/memo/MemoForm';
 import {memoListData, MemoListProps} from '../../data/memoListData';
 
 export const memoReducer = createSlice({
@@ -34,6 +35,31 @@ export const memoReducer = createSlice({
     },
 
     /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    - 함수 : reduxMemoListData에 key에 맞는 값을 수정한다
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+    updateMemoList: (state, action: PayloadAction<MemoFormDataProps>) => {
+      // 현재 날짜를 가져온다
+      const currentDate = new Date().toISOString().split('T')[0];
+      // map 함수로 기존 배열을 update한다
+      state.reduxMemoListData = state.reduxMemoListData.map(it => {
+        if (it.id === action.payload.id) {
+          // action.payload = 변경할 받은 데이터 | it = 기존데이터
+          const updatedMemo: MemoListProps = {
+            id: action.payload.id,
+            title: action.payload.title,
+            description: action.payload.contents,
+            createdAt: it.createdAt,
+            updatedAt: currentDate,
+            keyNumber: it.keyNumber,
+          };
+
+          return updatedMemo;
+        }
+        return it;
+      });
+    },
+
+    /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     - 함수 : reduxMemoListData에 key에 맞는 값을 제거한다
     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
     deleteMemoList: (state, action: PayloadAction<string>) => {
@@ -44,6 +70,7 @@ export const memoReducer = createSlice({
   },
 });
 
-export const {addMemoList, deleteMemoList} = memoReducer.actions;
+export const {addMemoList, updateMemoList, deleteMemoList} =
+  memoReducer.actions;
 
 export default memoReducer.reducer;
