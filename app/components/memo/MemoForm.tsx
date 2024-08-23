@@ -15,13 +15,14 @@ const MemoForm = ({route}: FormScreenProps) => {
   const {id, title, description, updatedAt} = route.params; // MemoItem에서 전달한 props
   const [toggle, setToggle] = useState<boolean>(false); // 읽기/수정 구분 state
 
-  // Form의 초기 데이터
-  const initialMemoFormData: MemoFormDataProps = {
-    id: id,
-    title: title,
-    date: updatedAt,
-    contents: description,
-  };
+  // Form의 초기 데이터 백업
+  const [initialMemoFormData, setInitialMemoFormData] =
+    useState<MemoFormDataProps>({
+      id: id,
+      title: title,
+      date: updatedAt,
+      contents: description,
+    });
 
   // Form의 데이터 객체 state
   const [memoFormData, setMemoFormData] = useState<MemoFormDataProps>({
@@ -39,7 +40,6 @@ const MemoForm = ({route}: FormScreenProps) => {
       ...prevData, // 이전 데이터
       [name]: value, // 이름 키로 값 변경
     }));
-    console.log('---->>>>--->>', memoFormData);
   };
 
   return (
@@ -61,6 +61,7 @@ const MemoForm = ({route}: FormScreenProps) => {
           memoFormData={memoFormData}
           setMemoFormData={setMemoFormData}
           initialMemoFormData={initialMemoFormData}
+          setInitialMemoFormData={setInitialMemoFormData}
         />
       </View>
       <View style={styles.formDateBlock}>

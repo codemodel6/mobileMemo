@@ -14,6 +14,9 @@ interface FormToolProps {
   memoFormData: MemoFormDataProps;
   setMemoFormData: React.Dispatch<React.SetStateAction<MemoFormDataProps>>;
   initialMemoFormData: MemoFormDataProps;
+  setInitialMemoFormData: React.Dispatch<
+    React.SetStateAction<MemoFormDataProps>
+  >;
 }
 
 const MemoFormTool: React.FC<FormToolProps> = ({
@@ -22,6 +25,7 @@ const MemoFormTool: React.FC<FormToolProps> = ({
   memoFormData,
   setMemoFormData,
   initialMemoFormData,
+  setInitialMemoFormData,
 }) => {
   const dispatch = useDispatch(); // 리덕스 함수 hook
   const navigation = useNavigation<NavigationProp<RootStackParamList>>(); // 화면 이동 navigation
@@ -46,6 +50,7 @@ const MemoFormTool: React.FC<FormToolProps> = ({
     }));
 
     dispatch(updateMemoList(memoFormData)); // 리덕스 함수에 id 전달
+    setInitialMemoFormData(memoFormData);
     setToggle(!toggle); // 읽기 모드 전환
   };
 
