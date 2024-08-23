@@ -11,7 +11,7 @@ export const memoReducer = createSlice({
     - 리듀서 : reduxMemoListData에 값을 추가한다
     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
     addMemoList: state => {
-      // 가장 상단의 메모를 가져온다
+      // 가장 하단의 메모를 가져온다
       const lastMemo =
         state.reduxMemoListData[state.reduxMemoListData.length - 1];
       // 가장 상단 메모 keyNumber + 1
@@ -30,7 +30,7 @@ export const memoReducer = createSlice({
       };
 
       // reduxMemoListData에 값을 추가한다
-      state.reduxMemoListData = [newMemoItem, ...state.reduxMemoListData];
+      state.reduxMemoListData = [...state.reduxMemoListData, newMemoItem];
     },
   },
 });
