@@ -1,6 +1,6 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {globalDisplay} from '../../assets/styles/global/globalDisplay';
 import {RootStackParamList} from '../../navigation/type';
@@ -38,6 +38,26 @@ const MemoFormTool: React.FC<FormToolProps> = ({
   };
 
   /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  - 함수 : 수정 confirm 메시지를 보여준다
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+  const showUpdateConfirm = (memoFormData: MemoFormDataProps) => {
+    Alert.alert(
+      '게시글 수정', // 제목
+      '게시글을 수정하시겠습니까?', // 메시지
+      [
+        {
+          text: '네', // "네" 버튼
+          onPress: () => handleUpdateForm(memoFormData), // 삭제 함수
+        },
+        {
+          text: '아니오', // "아니오" 버튼
+        },
+      ],
+      {cancelable: true}, // 빈 공간 클릭 시 닫힘
+    );
+  };
+
+  /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   - 함수 : serverMemoListData에 id에 맞는 데이터 수정
   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
   const handleUpdateForm = (memoFormData: MemoFormDataProps) => {
@@ -52,6 +72,26 @@ const MemoFormTool: React.FC<FormToolProps> = ({
     dispatch(updateMemoList(memoFormData)); // 리덕스 함수에 id 전달
     setInitialMemoFormData(memoFormData); // 초기값을 수정된 값으로 변경한다
     setToggle(!toggle); // 읽기 모드 전환
+  };
+
+  /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  - 함수 : 삭제 confirm 메시지를 보여준다
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+  const showDeleteConfirm = (id: string, title: string) => {
+    Alert.alert(
+      title, // 제목
+      '게시글을 삭제하시겠습니까?', // 메시지
+      [
+        {
+          text: '네', // "네" 버튼
+          onPress: () => handleDeleteForm(id), // 삭제 함수
+        },
+        {
+          text: '아니오', // "아니오" 버튼
+        },
+      ],
+      {cancelable: true}, // 빈 공간 클릭 시 닫힘
+    );
   };
 
   /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -79,7 +119,9 @@ const MemoFormTool: React.FC<FormToolProps> = ({
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.toolButton}
-            onPress={() => handleDeleteForm(memoFormData.id)}>
+            onPress={() =>
+              showDeleteConfirm(memoFormData.id, memoFormData.title)
+            }>
             <Text style={styles.toolButtonText}>삭제</Text>
           </TouchableOpacity>
         </View>
@@ -87,7 +129,7 @@ const MemoFormTool: React.FC<FormToolProps> = ({
         <View style={styles.MemoFormToolBlock}>
           <TouchableOpacity
             style={styles.toolButton}
-            onPress={() => handleUpdateForm(memoFormData)}>
+            onPress={() => showUpdateConfirm(memoFormData)}>
             <Text style={styles.toolButtonText}>수정</Text>
           </TouchableOpacity>
           <TouchableOpacity
