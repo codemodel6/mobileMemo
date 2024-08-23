@@ -4,23 +4,45 @@ import {globalDisplay} from '../../assets/styles/global/globalDisplay';
 import {MemoListProps} from '../../data/memoListData';
 import {useDispatch} from 'react-redux';
 import {deleteMemoList} from '../../redux/slice/memoSlice';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {RootStackParamList} from '../../navigation/type';
 
 interface MemoItemProps {
   it: MemoListProps;
 }
 
 const MemoItem: React.FC<MemoItemProps> = ({it}) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); // 리덕스 함수 hook
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>(); // 화면 이동 hook
 
+  interface FormNavigateProps {
+    (id: string, title: string, description: string, updatedAt: string): void;
+  }
   /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  - 함수 기능 : serverMemoListData에 key에 맞는 데이터 제거
+  - 함수 : serverMemoListData에 key에 맞는 데이터 제거
   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
   const handleDeleteData = (keyNumber: number) => {
     dispatch(deleteMemoList(keyNumber)); // 리덕스 함수에 key를 보내며 실행
   };
 
+  /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  - 함수 : 메모 아이템의 데이터를 props로 상세 페이지를 연다
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+  const handleNavigate: FormNavigateProps = (
+    id,
+    title,
+    description,
+    updatedAt,
+  ) => {
+    navigation.navigate('MemoForm', {id, title, description, updatedAt});
+  };
+
   return (
-    <View style={styles.memoItemWrapper}>
+    <TouchableOpacity
+      style={styles.memoItemWrapper}
+      onPress={() =>
+        handleNavigate(it.id, it.title, it.description, it.updatedAt)
+      }>
       <View style={styles.itemDataBlock}>
         <View style={styles.itemInfoBlock}>
           <Text style={styles.itemTitleText}>{it.title}</Text>
@@ -37,7 +59,7 @@ const MemoItem: React.FC<MemoItemProps> = ({it}) => {
           <Text style={styles.itemDeleteButtonText}>X</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

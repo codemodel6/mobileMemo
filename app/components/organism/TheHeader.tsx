@@ -13,8 +13,7 @@ const TheHeader = () => {
   );
 
   const memoListDataLength = serverMemoListData.reduxMemoListData.length; // reduxMemoListData 배열의 길이
-
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>(); // 화면 이동 navigation
 
   /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   - 함수 기능 : 메모리스트에 메모 추가를 위해 메모 추가 페이지로 이동

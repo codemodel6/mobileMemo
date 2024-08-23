@@ -2,8 +2,11 @@ import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
 import {globalDisplay} from '../../assets/styles/global/globalDisplay';
 import MemoFormTool from './MemoFormTool';
+import {FormScreenProps} from '../../navigation/type';
 
-const MemoForm = () => {
+const MemoForm = ({route}: FormScreenProps) => {
+  const {id, title, description, updatedAt} = route.params; // MemoItem에서 전달한 props
+
   interface MemoFormDataProps {
     title: string;
     date: string;
@@ -12,24 +15,24 @@ const MemoForm = () => {
 
   // Form의 데이터 객체 state
   const [memoFormData, setMemoFormData] = useState<MemoFormDataProps>({
-    title: '',
-    date: '',
-    contents: '',
+    title: title,
+    date: updatedAt,
+    contents: description,
   });
 
   /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   - 훅 기능 : 현재 날짜를 가져온 후 state에 넣어준다
   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
-  useEffect(() => {
-    // 날짜 생성 및 YYYY-MM-DD 형식 변환
-    const currentDate = new Date().toISOString().split('T')[0];
+  // useEffect(() => {
+  //   // 날짜 생성 및 YYYY-MM-DD 형식 변환
+  //   const currentDate = new Date().toISOString().split('T')[0];
 
-    // 데이터 객체 state에 date 값에 넣어준다
-    setMemoFormData(prevData => ({
-      ...prevData,
-      date: currentDate,
-    }));
-  }, []);
+  //   // 데이터 객체 state에 date 값에 넣어준다
+  //   setMemoFormData(prevData => ({
+  //     ...prevData,
+  //     date: currentDate,
+  //   }));
+  // }, []);
 
   /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   - 함수 기능 : Form 데이터 객체 수정 (keyof interface는 interface의 key 값만 넣을 수 있는 타입)
