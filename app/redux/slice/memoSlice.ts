@@ -38,8 +38,6 @@ export const memoReducer = createSlice({
     - 함수 : reduxMemoListData에 key에 맞는 값을 수정한다
     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
     updateMemoList: (state, action: PayloadAction<MemoFormDataProps>) => {
-      // 현재 날짜를 가져온다
-      const currentDate = new Date().toISOString().split('T')[0];
       // map 함수로 기존 배열을 update한다
       state.reduxMemoListData = state.reduxMemoListData.map(it => {
         if (it.id === action.payload.id) {
@@ -49,7 +47,7 @@ export const memoReducer = createSlice({
             title: action.payload.title,
             description: action.payload.contents,
             createdAt: it.createdAt,
-            updatedAt: currentDate,
+            updatedAt: it.updatedAt,
             keyNumber: it.keyNumber,
           };
 

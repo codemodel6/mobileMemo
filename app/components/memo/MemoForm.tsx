@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
+import {ScrollView, StyleSheet, TextInput, View} from 'react-native';
 import {globalDisplay} from '../../assets/styles/global/globalDisplay';
 import {FormScreenProps} from '../../navigation/type';
 import MemoFormTool from './MemoFormTool';
@@ -15,6 +15,7 @@ const MemoForm = ({route}: FormScreenProps) => {
   const {id, title, description, updatedAt} = route.params; // MemoItem에서 전달한 props
   const [toggle, setToggle] = useState<boolean>(false); // 읽기/수정 구분 state
 
+  // Form의 초기 데이터
   const initialMemoFormData: MemoFormDataProps = {
     id: id,
     title: title,
@@ -31,20 +32,6 @@ const MemoForm = ({route}: FormScreenProps) => {
   });
 
   /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  - 훅 : 현재 날짜를 가져온 후 state에 넣어준다
-  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
-  // useEffect(() => {
-  //   // 날짜 생성 및 YYYY-MM-DD 형식 변환
-  //   const currentDate = new Date().toISOString().split('T')[0];
-
-  //   // 데이터 객체 state에 date 값에 넣어준다
-  //   setMemoFormData(prevData => ({
-  //     ...prevData,
-  //     date: currentDate,
-  //   }));
-  // }, []);
-
-  /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   - 함수 : Form 데이터 객체 수정 (keyof interface는 interface의 key 값만 넣을 수 있는 타입)
   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
   const handleMemoFormData = (name: keyof MemoFormDataProps, value: string) => {
@@ -52,6 +39,7 @@ const MemoForm = ({route}: FormScreenProps) => {
       ...prevData, // 이전 데이터
       [name]: value, // 이름 키로 값 변경
     }));
+    console.log('---->>>>--->>', memoFormData);
   };
 
   return (
@@ -76,7 +64,11 @@ const MemoForm = ({route}: FormScreenProps) => {
         />
       </View>
       <View style={styles.formDateBlock}>
-        <Text style={styles.formDateText}>{memoFormData.date}</Text>
+        <TextInput
+          style={styles.formDateText}
+          value={memoFormData.date}
+          editable={false}
+        />
       </View>
       <View style={styles.formContentsBlock}>
         <TextInput

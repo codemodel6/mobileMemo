@@ -34,9 +34,17 @@ const MemoFormTool: React.FC<FormToolProps> = ({
   };
 
   /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  - 함수 : serverMemoListData에 id에 맞는 데이터 제거
+  - 함수 : serverMemoListData에 id에 맞는 데이터 수정
   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
   const handleUpdateForm = (memoFormData: MemoFormDataProps) => {
+    // 현재 날짜를 가져온다
+    const currentDate = new Date().toISOString().split('T')[0];
+    // 현재 날짜 state에 반영
+    setMemoFormData(prevData => ({
+      ...prevData,
+      date: currentDate,
+    }));
+
     dispatch(updateMemoList(memoFormData)); // 리덕스 함수에 id 전달
     setToggle(!toggle); // 읽기 모드 전환
   };
