@@ -6,7 +6,7 @@ import {RootState} from '../../redux/store';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/type';
 import BackArrowIcon from '../../assets/svgIcon/BackArrowIcon';
-import SearchIcon from '../../assets/svgIcon/searchIcon';
+import SearchIcon from '../../assets/svgIcon/SearchIcon';
 
 const TheHeader = () => {
   // 리덕스의 초기 값
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     height: 70,
     backgroundColor: '#000000',
     paddingHorizontal: 10,
-    paddingTop: 10, // 상태바 고려 설정
+    paddingTop: 15, // 상태바 고려 설정
   },
   headerBackButton: {
     ...globalDisplay.centerColumn,
@@ -63,11 +63,6 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 15,
-  },
-  headerSearchButtonText: {
-    ...globalDisplay.centerRow,
-    fontSize: 15,
-    color: '#000000',
   },
 });
 

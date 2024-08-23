@@ -1,40 +1,24 @@
-import React from 'react';
-import {SafeAreaView, useColorScheme} from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import TheHeader from './components/organism/TheHeader';
-import MemoListPage from './page/MemoListPage';
-import {Provider} from 'react-redux';
-import store from './redux/store';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React from 'react';
+import {SafeAreaView, StyleSheet} from 'react-native';
+import {Provider} from 'react-redux';
 import MemoForm from './components/memo/MemoForm';
+import TheHeader from './components/organism/TheHeader';
 import {RootStackParamList} from './navigation/type';
+import MemoListPage from './page/MemoListPage';
+import store from './redux/store';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    flex: 1,
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
     <Provider store={store}>
-      <SafeAreaView style={backgroundStyle}>
+      <SafeAreaView style={styles.safeArea}>
         <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="MemoListPage"
-              component={MemoListPage}
-              options={{header: () => <TheHeader />}}
-            />
-            <Stack.Screen
-              name="MemoForm"
-              component={MemoForm}
-              options={{header: () => <TheHeader />}}
-            />
+          <Stack.Navigator screenOptions={{header: () => <TheHeader />}}>
+            <Stack.Screen name="MemoListPage" component={MemoListPage} />
+            <Stack.Screen name="MemoForm" component={MemoForm} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>
@@ -42,4 +26,9 @@ function App(): React.JSX.Element {
   );
 }
 
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
+});
 export default App;
