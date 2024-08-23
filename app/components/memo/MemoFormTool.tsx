@@ -38,7 +38,7 @@ const MemoFormTool: React.FC<FormToolProps> = ({
   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
   const handleUpdateForm = (memoFormData: MemoFormDataProps) => {
     dispatch(updateMemoList(memoFormData)); // 리덕스 함수에 id 전달
-    // navigation.navigate('MemoListPage'); // 메모리스트 이동
+    setToggle(!toggle); // 읽기 모드 전환
   };
 
   /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

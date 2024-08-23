@@ -64,6 +64,7 @@ const MemoForm = ({route}: FormScreenProps) => {
           placeholder="제목"
           value={memoFormData.title}
           onChangeText={text => handleMemoFormData('title', text)}
+          editable={toggle}
         />
         <MemoFormTool
           toggle={toggle}
@@ -83,6 +84,7 @@ const MemoForm = ({route}: FormScreenProps) => {
           placeholder="내용을 입력해주세요"
           value={memoFormData.contents}
           onChangeText={text => handleMemoFormData('contents', text)}
+          editable={toggle}
         />
       </View>
     </ScrollView>
@@ -109,6 +111,7 @@ const styles = StyleSheet.create({
 
   formTitleText: {
     fontSize: 20,
+    color: '#000000',
   },
 
   formToolBlock: {
@@ -137,6 +140,7 @@ const styles = StyleSheet.create({
 
   formContentsText: {
     fontSize: 18,
+    color: '#000000',
   },
 });
 
