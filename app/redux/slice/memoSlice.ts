@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {memoListData, MemoListProps} from '../../data/memoListData';
 
 export const memoReducer = createSlice({
@@ -8,7 +8,7 @@ export const memoReducer = createSlice({
   },
   reducers: {
     /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    - 리듀서 : reduxMemoListData에 값을 추가한다
+    - 함수 : reduxMemoListData에 값을 추가한다
     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
     addMemoList: state => {
       // 가장 하단의 메모를 가져온다
@@ -32,9 +32,18 @@ export const memoReducer = createSlice({
       // reduxMemoListData에 값을 추가한다
       state.reduxMemoListData = [...state.reduxMemoListData, newMemoItem];
     },
+
+    /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    - 함수 : reduxMemoListData에 key에 맞는 값을 제거한다
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+    deleteMemoList: (state, action: PayloadAction<number>) => {
+      state.reduxMemoListData = state.reduxMemoListData.filter(
+        it => it.keyNumber !== action.payload, // key와 전달받는 key의 값이 일치하면 필터
+      );
+    },
   },
 });
 
-export const {addMemoList} = memoReducer.actions;
+export const {addMemoList, deleteMemoList} = memoReducer.actions;
 
 export default memoReducer.reducer;

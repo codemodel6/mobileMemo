@@ -2,12 +2,23 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {globalDisplay} from '../../assets/styles/global/globalDisplay';
 import {MemoListProps} from '../../data/memoListData';
+import {useDispatch} from 'react-redux';
+import {deleteMemoList} from '../../redux/slice/memoSlice';
 
 interface MemoItemProps {
   it: MemoListProps;
 }
 
 const MemoItem: React.FC<MemoItemProps> = ({it}) => {
+  const dispatch = useDispatch();
+
+  /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  - 함수 기능 : serverMemoListData에 key에 맞는 데이터 제거
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+  const handleDeleteData = (keyNumber: number) => {
+    dispatch(deleteMemoList(keyNumber)); // 리덕스 함수에 key를 보내며 실행
+  };
+
   return (
     <View style={styles.memoItemWrapper}>
       <View style={styles.itemDataBlock}>
@@ -20,7 +31,9 @@ const MemoItem: React.FC<MemoItemProps> = ({it}) => {
         </View>
       </View>
       <View style={styles.itememoDeleteBlock}>
-        <TouchableOpacity style={styles.itemDeleteButton}>
+        <TouchableOpacity
+          style={styles.itemDeleteButton}
+          onPress={() => handleDeleteData(it.keyNumber)}>
           <Text style={styles.itemDeleteButtonText}>X</Text>
         </TouchableOpacity>
       </View>
