@@ -50,7 +50,7 @@ const MemoFormTool: React.FC<FormToolProps> = ({
     }));
 
     dispatch(updateMemoList(memoFormData)); // 리덕스 함수에 id 전달
-    setInitialMemoFormData(memoFormData);
+    setInitialMemoFormData(memoFormData); // 초기값을 수정된 값으로 변경한다
     setToggle(!toggle); // 읽기 모드 전환
   };
 

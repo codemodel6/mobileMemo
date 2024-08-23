@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {globalDisplay} from '../../assets/styles/global/globalDisplay';
 import {MemoListProps} from '../../data/memoListData';
 import {useDispatch} from 'react-redux';
@@ -37,6 +37,26 @@ const MemoItem: React.FC<MemoItemProps> = ({it}) => {
     navigation.navigate('MemoForm', {id, title, description, updatedAt});
   };
 
+  /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  - 함수 : confirm 메시지를 보여준다
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+  const showConfirm = (id: string, title: string) => {
+    Alert.alert(
+      title, // 제목
+      '게시글을 삭제하시겠습니까?', // 메시지
+      [
+        {
+          text: '네', // "네" 버튼
+          onPress: () => handleDeleteData(id), // 삭제 함수
+        },
+        {
+          text: '아니오', // "아니오" 버튼
+        },
+      ],
+      {cancelable: true}, // 빈 공간 클릭 시 닫힘
+    );
+  };
+
   return (
     <TouchableOpacity
       style={styles.memoItemWrapper}
@@ -55,7 +75,8 @@ const MemoItem: React.FC<MemoItemProps> = ({it}) => {
       <View style={styles.itememoDeleteBlock}>
         <TouchableOpacity
           style={styles.itemDeleteButton}
-          onPress={() => handleDeleteData(it.id)}>
+          // onPress={() => handleDeleteData(it.id)}>
+          onPress={() => showConfirm(it.id, it.title)}>
           <Text style={styles.itemDeleteButtonText}>X</Text>
         </TouchableOpacity>
       </View>
