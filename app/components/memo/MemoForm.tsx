@@ -94,8 +94,8 @@ const MemoForm = ({route}: FormScreenProps) => {
 const styles = StyleSheet.create({
   memoFormWrapper: {
     flex: 1,
-    backgroundColor: '#c22a2a',
-    paddingHorizontal: 10,
+    // backgroundColor: '#c22a2a',
+    paddingHorizontal: 30,
   },
 
   memoFormContainer: {
@@ -105,27 +105,27 @@ const styles = StyleSheet.create({
   formTitleBlock: {
     ...globalDisplay.betweenRow,
     width: '100%',
-    height: 50,
-    backgroundColor: '#d38715',
+    height: 80,
+    // backgroundColor: '#d38715',
   },
 
   formTitleText: {
-    fontSize: 20,
+    fontSize: 25,
     color: '#000000',
+    fontWeight: 'bold',
   },
 
   formToolBlock: {
     width: '40%',
     height: '100%',
-    backgroundColor: '#20c2db',
   },
 
   formDateBlock: {
     justifyContent: 'center',
     alignItems: 'flex-end',
     width: '100%',
-    height: 30,
-    backgroundColor: '#e3d513',
+    height: 50,
+    // backgroundColor: '#e3d513',
   },
 
   formDateText: {
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   formContentsBlock: {
     flex: 1,
     width: '100%',
-    backgroundColor: '#77d215',
+    // backgroundColor: '#77d215',
   },
 
   formContentsText: {

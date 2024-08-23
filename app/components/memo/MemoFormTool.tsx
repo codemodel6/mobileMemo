@@ -90,13 +90,12 @@ const MemoFormTool: React.FC<FormToolProps> = ({
 
 const styles = StyleSheet.create({
   MemoFormToolWrppaer: {
-    width: '40%',
+    width: '30%',
     height: '100%',
-    backgroundColor: '#20c2db',
   },
 
   MemoFormToolBlock: {
-    ...globalDisplay.aroundRow,
+    ...globalDisplay.betweenRow,
     width: '100%',
     height: '100%',
   },
@@ -105,11 +104,11 @@ const styles = StyleSheet.create({
     ...globalDisplay.centerRow,
     width: 40,
     height: 40,
-    backgroundColor: '#db20d2',
   },
 
   toolButtonText: {
-    fontSize: 18,
+    fontSize: 16,
+    color: '#0adaff',
   },
 });
 export default MemoFormTool;
