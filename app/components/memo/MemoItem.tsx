@@ -69,13 +69,17 @@ const MemoItem: React.FC<MemoItemProps> = ({it}) => {
           <Text style={styles.itemDateText}>{it.updatedAt}</Text>
         </View>
         <View style={styles.itemContentsBlock}>
-          <Text style={styles.itemContents}>{it.description}</Text>
+          <Text
+            style={styles.itemContents}
+            numberOfLines={1}
+            ellipsizeMode="tail">
+            {it.description}
+          </Text>
         </View>
       </View>
       <View style={styles.itememoDeleteBlock}>
         <TouchableOpacity
           style={styles.itemDeleteButton}
-          // onPress={() => handleDeleteData(it.id)}>
           onPress={() => showConfirm(it.id, it.title)}>
           <Text style={styles.itemDeleteButtonText}>X</Text>
         </TouchableOpacity>

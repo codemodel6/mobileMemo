@@ -81,6 +81,8 @@ const MemoForm = ({route}: FormScreenProps) => {
           value={memoFormData.contents}
           onChangeText={text => handleMemoFormData('contents', text)}
           editable={toggle}
+          multiline={true}
+          textAlignVertical="top"
         />
       </View>
     </ScrollView>
