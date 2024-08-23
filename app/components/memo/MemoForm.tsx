@@ -6,6 +6,7 @@ import {FormScreenProps} from '../../navigation/type';
 
 const MemoForm = ({route}: FormScreenProps) => {
   const {id, title, description, updatedAt} = route.params; // MemoItem에서 전달한 props
+  const [toggle, setToggle] = useState<boolean>(false);
 
   interface MemoFormDataProps {
     title: string;
@@ -21,7 +22,7 @@ const MemoForm = ({route}: FormScreenProps) => {
   });
 
   /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  - 훅 기능 : 현재 날짜를 가져온 후 state에 넣어준다
+  - 훅 : 현재 날짜를 가져온 후 state에 넣어준다
   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
   // useEffect(() => {
   //   // 날짜 생성 및 YYYY-MM-DD 형식 변환
@@ -35,7 +36,7 @@ const MemoForm = ({route}: FormScreenProps) => {
   // }, []);
 
   /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  - 함수 기능 : Form 데이터 객체 수정 (keyof interface는 interface의 key 값만 넣을 수 있는 타입)
+  - 함수 : Form 데이터 객체 수정 (keyof interface는 interface의 key 값만 넣을 수 있는 타입)
   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
   const handleMemoFormData = (name: keyof MemoFormDataProps, value: string) => {
     setMemoFormData(prevData => ({
@@ -55,7 +56,7 @@ const MemoForm = ({route}: FormScreenProps) => {
           value={memoFormData.title}
           onChangeText={text => handleMemoFormData('title', text)}
         />
-        <MemoFormTool />
+        <MemoFormTool toggle={toggle} setToggle={setToggle} />
       </View>
       <View style={styles.formDateBlock}>
         <Text style={styles.formDateText}>{memoFormData.date}</Text>
