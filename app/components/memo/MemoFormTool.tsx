@@ -1,6 +1,13 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Alert,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {globalDisplay} from '../../assets/styles/global/globalDisplay';
 import {RootStackParamList} from '../../navigation/type';
@@ -17,6 +24,7 @@ interface FormToolProps {
   setInitialMemoFormData: React.Dispatch<
     React.SetStateAction<MemoFormDataProps>
   >;
+  formTitleTextRef: React.RefObject<TextInput>;
 }
 
 const MemoFormTool: React.FC<FormToolProps> = ({
@@ -26,9 +34,21 @@ const MemoFormTool: React.FC<FormToolProps> = ({
   setMemoFormData,
   initialMemoFormData,
   setInitialMemoFormData,
+  formTitleTextRef,
 }) => {
   const dispatch = useDispatch(); // 리덕스 함수 hook
   const navigation = useNavigation<NavigationProp<RootStackParamList>>(); // 화면 이동 navigation
+
+  /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  - 함수 : 읽기/수정 을 결정하는 toggle 변경
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+  const handleUpdateMode = () => {
+    handleToggle();
+    // State 업데이트 이후 제목에 focus를 준다
+    setTimeout(() => {
+      formTitleTextRef.current?.focus();
+    }, 0);
+  };
 
   /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   - 함수 : 읽기/수정 을 결정하는 toggle 변경
@@ -114,7 +134,9 @@ const MemoFormTool: React.FC<FormToolProps> = ({
     <View style={styles.MemoFormToolWrppaer}>
       {!toggle ? (
         <View style={styles.MemoFormToolBlock}>
-          <TouchableOpacity style={styles.toolButton} onPress={handleToggle}>
+          <TouchableOpacity
+            style={styles.toolButton}
+            onPress={handleUpdateMode}>
             <Text style={styles.toolButtonText}>편집</Text>
           </TouchableOpacity>
           <TouchableOpacity

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {ScrollView, StyleSheet, TextInput, View} from 'react-native';
 import {globalDisplay} from '../../assets/styles/global/globalDisplay';
 import {FormScreenProps} from '../../navigation/type';
@@ -14,6 +14,7 @@ export interface MemoFormDataProps {
 const MemoForm = ({route}: FormScreenProps) => {
   const {id, title, description, updatedAt} = route.params; // MemoItem에서 전달한 props
   const [toggle, setToggle] = useState<boolean>(false); // 읽기/수정 구분 state
+  const formTitleTextRef = useRef<TextInput>(null); // TextInput ref
 
   // Form의 초기 데이터 백업
   const [initialMemoFormData, setInitialMemoFormData] =
@@ -48,6 +49,7 @@ const MemoForm = ({route}: FormScreenProps) => {
       contentContainerStyle={styles.memoFormContainer}>
       <View style={styles.formTitleBlock}>
         <TextInput
+          ref={formTitleTextRef}
           style={styles.formTitleText}
           placeholder="제목"
           value={memoFormData.title}
@@ -62,6 +64,7 @@ const MemoForm = ({route}: FormScreenProps) => {
           setMemoFormData={setMemoFormData}
           initialMemoFormData={initialMemoFormData}
           setInitialMemoFormData={setInitialMemoFormData}
+          formTitleTextRef={formTitleTextRef}
         />
       </View>
       <View style={styles.formDateBlock}>
