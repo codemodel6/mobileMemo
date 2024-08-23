@@ -36,9 +36,9 @@ export const memoReducer = createSlice({
     /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     - 함수 : reduxMemoListData에 key에 맞는 값을 제거한다
     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
-    deleteMemoList: (state, action: PayloadAction<number>) => {
+    deleteMemoList: (state, action: PayloadAction<string>) => {
       state.reduxMemoListData = state.reduxMemoListData.filter(
-        it => it.keyNumber !== action.payload, // key와 전달받는 key의 값이 일치하면 필터
+        it => it.id !== action.payload, // key와 전달받는 key의 값이 일치하면 필터
       );
     },
   },

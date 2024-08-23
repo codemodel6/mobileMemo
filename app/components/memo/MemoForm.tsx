@@ -4,15 +4,21 @@ import {globalDisplay} from '../../assets/styles/global/globalDisplay';
 import MemoFormTool from './MemoFormTool';
 import {FormScreenProps} from '../../navigation/type';
 
+export interface MemoFormDataProps {
+  title: string;
+  date: string;
+  contents: string;
+}
+
 const MemoForm = ({route}: FormScreenProps) => {
   const {id, title, description, updatedAt} = route.params; // MemoItem에서 전달한 props
-  const [toggle, setToggle] = useState<boolean>(false);
+  const [toggle, setToggle] = useState<boolean>(false); // 읽기/수정 구분 state
 
-  interface MemoFormDataProps {
-    title: string;
-    date: string;
-    contents: string;
-  }
+  const initialMemoFormData: MemoFormDataProps = {
+    title: title,
+    date: updatedAt,
+    contents: description,
+  };
 
   // Form의 데이터 객체 state
   const [memoFormData, setMemoFormData] = useState<MemoFormDataProps>({
@@ -56,7 +62,14 @@ const MemoForm = ({route}: FormScreenProps) => {
           value={memoFormData.title}
           onChangeText={text => handleMemoFormData('title', text)}
         />
-        <MemoFormTool toggle={toggle} setToggle={setToggle} />
+        <MemoFormTool
+          toggle={toggle}
+          setToggle={setToggle}
+          id={id}
+          memoFormData={memoFormData}
+          setMemoFormData={setMemoFormData}
+          initialMemoFormData={initialMemoFormData}
+        />
       </View>
       <View style={styles.formDateBlock}>
         <Text style={styles.formDateText}>{memoFormData.date}</Text>

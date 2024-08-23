@@ -21,8 +21,8 @@ const MemoItem: React.FC<MemoItemProps> = ({it}) => {
   /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   - 함수 : serverMemoListData에 key에 맞는 데이터 제거
   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
-  const handleDeleteData = (keyNumber: number) => {
-    dispatch(deleteMemoList(keyNumber)); // 리덕스 함수에 key를 보내며 실행
+  const handleDeleteData = (id: string) => {
+    dispatch(deleteMemoList(id)); // 리덕스 함수에 key를 보내며 실행
   };
 
   /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -55,7 +55,7 @@ const MemoItem: React.FC<MemoItemProps> = ({it}) => {
       <View style={styles.itememoDeleteBlock}>
         <TouchableOpacity
           style={styles.itemDeleteButton}
-          onPress={() => handleDeleteData(it.keyNumber)}>
+          onPress={() => handleDeleteData(it.id)}>
           <Text style={styles.itemDeleteButtonText}>X</Text>
         </TouchableOpacity>
       </View>
