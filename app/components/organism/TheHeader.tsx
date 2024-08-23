@@ -5,6 +5,8 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/type';
+import BackArrowIcon from '../../assets/svgIcon/BackArrowIcon';
+import SearchIcon from '../../assets/svgIcon/searchIcon';
 
 const TheHeader = () => {
   // 리덕스의 초기 값
@@ -26,11 +28,11 @@ const TheHeader = () => {
       <TouchableOpacity
         style={styles.headerBackButton}
         onPress={handleNavigate}>
-        <Text style={styles.headerBackButtonText}>뒤</Text>
+        <BackArrowIcon width={24} height={24} />
       </TouchableOpacity>
       <Text style={styles.headerTitle}>메모리스트({memoListDataLength})</Text>
       <TouchableOpacity style={styles.headerSearchButton}>
-        <Text style={styles.headerSearchButtonText}>돋</Text>
+        <SearchIcon width={24} height={24} />
       </TouchableOpacity>
     </View>
   );
@@ -46,15 +48,10 @@ const styles = StyleSheet.create({
   },
   headerBackButton: {
     ...globalDisplay.centerColumn,
-    backgroundColor: '#ffffff',
+    // backgroundColor: '#ffffff',
     width: 30,
     height: 30,
     borderRadius: 15,
-  },
-  headerBackButtonText: {
-    ...globalDisplay.centerRow,
-    fontSize: 15,
-    color: '#000000',
   },
   headerTitle: {
     fontSize: 20,
@@ -62,7 +59,7 @@ const styles = StyleSheet.create({
   },
   headerSearchButton: {
     ...globalDisplay.centerColumn,
-    backgroundColor: '#ffffff',
+    // backgroundColor: '#ffffff',
     width: 30,
     height: 30,
     borderRadius: 15,
