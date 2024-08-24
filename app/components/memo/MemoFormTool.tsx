@@ -96,7 +96,7 @@ const MemoFormTool: React.FC<FormToolProps> = ({
   };
 
   /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  - 함수 : 수정 confirm 메시지를 보여준다
+  - 함수 : 수정 완료 메시지를 보여준다
   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
   const showCompleteAlet = () => {
     Alert.alert(
