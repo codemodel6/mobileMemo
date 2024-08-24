@@ -12,12 +12,13 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {globalDisplay} from '../../assets/styles/global/globalDisplay';
 import BackArrowIcon from '../../assets/svgIcon/BackArrowIcon';
 import SearchIcon from '../../assets/svgIcon/SearchIcon';
 import {RootStackParamList} from '../../navigation/type';
 import {RootState} from '../../redux/store';
+import {searchMemoList} from '../../redux/slice/memoSlice';
 
 // route의 타입
 type MemoFormRouteProp = RouteProp<{
@@ -30,9 +31,10 @@ const TheHeader = () => {
   const serverMemoListData = useSelector(
     (state: RootState) => state.memoReducer,
   );
-  const route = useRoute<MemoFormRouteProp>();
+  const route = useRoute<MemoFormRouteProp>(); // 화면 이동시의 값 hook
   const memoListDataLength = serverMemoListData.reduxMemoListData.length; // reduxMemoListData 배열의 길이
   const navigation = useNavigation<NavigationProp<RootStackParamList>>(); // 화면 이동 navigation
+  const dispatch = useDispatch();
 
   const [searchToggle, setSearchToggle] = useState(false); // 검색창 on/off state
   const [searchText, setSearchText] = useState(''); // 검색창 입력값 state
@@ -48,15 +50,25 @@ const TheHeader = () => {
   - 함수 기능 : 메모리스트에 메모 추가를 위해 메모 추가 페이지로 이동
   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
   const handleNavigate = () => {
-    navigation.navigate('MemoListPage');
+    navigation.navigate('MemoListPage'); // MemoListPage로 이동
   };
 
   /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   - 함수 기능 : search바 on/off
   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
   const handleSearchToggle = () => {
-    setSearchToggle(!searchToggle);
+    setSearchToggle(!searchToggle); // toggle on/off
+    setSearchText(''); // searchText 값을 지운다
   };
+
+  /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  - 함수 기능 : search바 on/off
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+  const handleSearchListData = () => {
+    dispatch(searchMemoList(searchText)); // 리덕스의 searchMemoList 함수 실행
+    handleSearchToggle(); // toggle 관련 함수 실행
+  };
+
   return (
     <View style={styles.headerWrapper}>
       {isMemoForm && (
@@ -78,7 +90,6 @@ const TheHeader = () => {
           </View>
         </TouchableOpacity>
       )}
-
       {searchToggle && (
         <View style={styles.headerSearchBlock}>
           <TextInput
@@ -86,6 +97,7 @@ const TheHeader = () => {
             placeholder="제목을 입력해주세요"
             value={searchText}
             onChangeText={setSearchText}
+            onSubmitEditing={handleSearchListData}
           />
         </View>
       )}

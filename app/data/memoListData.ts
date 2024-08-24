@@ -57,8 +57,8 @@ export const memoListData: MemoListProps[] = [
   },
   {
     id: 'AMIFE-6AEM-EFIAM-MEIFE5',
-    title: '다섯번째 메모',
-    description: '다섯번째 메모의 상세 내용입니다.',
+    title: 'HelloWorld',
+    description: 'HelloWorld with my ReactNative Memo',
     createdAt: '2024-06-11',
     updatedAt: '2024-07-06',
     keyNumber: 5,

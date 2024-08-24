@@ -62,13 +62,27 @@ export const memoReducer = createSlice({
     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
     deleteMemoList: (state, action: PayloadAction<string>) => {
       state.reduxMemoListData = state.reduxMemoListData.filter(
-        it => it.id !== action.payload, // key와 전달받는 key의 값이 일치하면 필터
+        it => it.id !== action.payload, // id와 전달받는 id가 같지 않은 값만 return
       );
+    },
+
+    /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    - 함수 : reduxMemoListData에 제목에 맞는 값을 찾는다
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+    searchMemoList: (state, action: PayloadAction<string>) => {
+      if (action.payload === '') {
+        // 빈 값을 넣을 시 초기 값으로 돌아간다
+        state.reduxMemoListData = memoListData;
+      } else {
+        state.reduxMemoListData = state.reduxMemoListData.filter(it =>
+          it.title.toLowerCase().includes(action.payload.toLowerCase()),
+        );
+      }
     },
   },
 });
 
-export const {addMemoList, updateMemoList, deleteMemoList} =
+export const {addMemoList, updateMemoList, deleteMemoList, searchMemoList} =
   memoReducer.actions;
 
 export default memoReducer.reducer;
