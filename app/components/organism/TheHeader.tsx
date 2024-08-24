@@ -4,8 +4,14 @@ import {
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
-import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useState} from 'react';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {useSelector} from 'react-redux';
 import {globalDisplay} from '../../assets/styles/global/globalDisplay';
 import BackArrowIcon from '../../assets/svgIcon/BackArrowIcon';
@@ -28,6 +34,9 @@ const TheHeader = () => {
   const memoListDataLength = serverMemoListData.reduxMemoListData.length; // reduxMemoListData 배열의 길이
   const navigation = useNavigation<NavigationProp<RootStackParamList>>(); // 화면 이동 navigation
 
+  const [searchToggle, setSearchToggle] = useState(false); // 검색창 on/off state
+  const [searchText, setSearchText] = useState(''); // 검색창 입력값 state
+
   // 현재 페이지의 이름을 확인
   const isMemoListPage = route.name === 'MemoListPage';
   const isMemoForm = route.name === 'MemoForm';
@@ -40,6 +49,13 @@ const TheHeader = () => {
   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
   const handleNavigate = () => {
     navigation.navigate('MemoListPage');
+  };
+
+  /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  - 함수 기능 : search바 on/off
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+  const handleSearchToggle = () => {
+    setSearchToggle(!searchToggle);
   };
   return (
     <View style={styles.headerWrapper}>
@@ -54,11 +70,24 @@ const TheHeader = () => {
       )}
       <Text style={styles.headerTitle}>{headerTitle}</Text>
       {isMemoListPage && (
-        <TouchableOpacity style={styles.headerSearchButton}>
+        <TouchableOpacity
+          style={styles.headerSearchButton}
+          onPress={handleSearchToggle}>
           <View style={styles.svgWrapper}>
             <SearchIcon width={20} height={20} />
           </View>
         </TouchableOpacity>
+      )}
+
+      {searchToggle && (
+        <View style={styles.headerSearchBlock}>
+          <TextInput
+            style={styles.headerSearchInput}
+            placeholder="제목을 입력해주세요"
+            value={searchText}
+            onChangeText={setSearchText}
+          />
+        </View>
       )}
     </View>
   );
@@ -95,6 +124,22 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  headerSearchBlock: {
+    position: 'absolute',
+    top: 70,
+    left: 0,
+    right: 0,
+    backgroundColor: '#000000',
+    padding: 5,
+    zIndex: 10,
+  },
+  headerSearchInput: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#ffffff',
+    padding: 10,
+    borderRadius: 5,
   },
 });
 
