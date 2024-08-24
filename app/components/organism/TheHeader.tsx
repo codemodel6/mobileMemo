@@ -62,7 +62,7 @@ const TheHeader = () => {
   };
 
   /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  - 함수 기능 : search바 on/off
+  - 함수 기능 : memoListData중 searchInput에 입력한 값을 찾는다
   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
   const handleSearchListData = () => {
     dispatch(searchMemoList(searchText)); // 리덕스의 searchMemoList 함수 실행
