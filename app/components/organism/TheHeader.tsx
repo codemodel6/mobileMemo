@@ -61,8 +61,6 @@ const styles = StyleSheet.create({
     paddingTop: 15, // 상태바 고려 설정
   },
   headerBackButton: {
-    // ...globalDisplay.centerColumn,
-    // top: 10,
     position: 'absolute',
     left: 10,
     top: '50%',
@@ -75,16 +73,11 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
   headerSearchButton: {
-    // ...globalDisplay.centerColumn,
     position: 'absolute',
     right: 10,
-    paddingTop: 15,
     top: '50%',
-    backgroundColor: '#b51717',
     width: 30,
     height: 30,
-    justifyContent: 'center', // 세로 중앙 정렬
-    alignItems: 'center', // 가로 중앙 정렬
   },
   svgWrapper: {
     width: '100%',
