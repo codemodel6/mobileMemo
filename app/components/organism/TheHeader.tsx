@@ -1,29 +1,39 @@
-import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {globalDisplay} from '../../assets/styles/global/globalDisplay';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../redux/store';
 import {
   NavigationProp,
+  RouteProp,
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
-import {RootStackParamList} from '../../navigation/type';
+import React from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {useSelector} from 'react-redux';
+import {globalDisplay} from '../../assets/styles/global/globalDisplay';
 import BackArrowIcon from '../../assets/svgIcon/BackArrowIcon';
 import SearchIcon from '../../assets/svgIcon/SearchIcon';
+import {RootStackParamList} from '../../navigation/type';
+import {RootState} from '../../redux/store';
+
+// route의 타입
+type MemoFormRouteProp = RouteProp<{
+  MemoListPage: {title?: string};
+  MemoForm: {title?: string};
+}>;
 
 const TheHeader = () => {
   // 리덕스의 초기 값
   const serverMemoListData = useSelector(
     (state: RootState) => state.memoReducer,
   );
-  const route = useRoute();
+  const route = useRoute<MemoFormRouteProp>();
   const memoListDataLength = serverMemoListData.reduxMemoListData.length; // reduxMemoListData 배열의 길이
   const navigation = useNavigation<NavigationProp<RootStackParamList>>(); // 화면 이동 navigation
 
   // 현재 페이지의 이름을 확인
   const isMemoListPage = route.name === 'MemoListPage';
   const isMemoForm = route.name === 'MemoForm';
+
+  const headerTitle =
+    route.params?.title || `메모리스트(${memoListDataLength})`;
 
   /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   - 함수 기능 : 메모리스트에 메모 추가를 위해 메모 추가 페이지로 이동
@@ -37,10 +47,12 @@ const TheHeader = () => {
         <TouchableOpacity
           style={styles.headerBackButton}
           onPress={handleNavigate}>
-          <BackArrowIcon width={24} height={24} />
+          <View style={styles.svgWrapper}>
+            <BackArrowIcon width={24} height={24} />
+          </View>
         </TouchableOpacity>
       )}
-      <Text style={styles.headerTitle}>메모리스트({memoListDataLength})</Text>
+      <Text style={styles.headerTitle}>{headerTitle}</Text>
       {isMemoListPage && (
         <TouchableOpacity style={styles.headerSearchButton}>
           <View style={styles.svgWrapper}>
@@ -64,7 +76,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 10,
     top: '50%',
-    backgroundColor: '#b51717',
     width: 30,
     height: 30,
   },
