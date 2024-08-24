@@ -2,7 +2,7 @@
 1. git clone https://github.com/codemodel6/washswat-setak-memo.git 명령어를 통해 local vsocode에 프로젝트를 클론받아주세요.
 2. vscode의 명령어 터미널에 npm install 명령어를 통해 package.json에 있는 패키지들을 다운 받아 주세요.
 3. android studio의 에뮬레이터를 열어주세요
-4. npm run android 명령어를 통해 react-cli 를 켜주시고 a 버튼을 눌러 안드로이드 예뮬레이터에 프로젝트를 띄어주세요.
+4. npm run android 명령어를 통해 react-cli 를 켜주시고 a 버튼을 눌러 안드로이드 에뮬레이터에 프로젝트를 띄어주세요.
 
 
 
