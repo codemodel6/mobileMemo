@@ -91,7 +91,24 @@ const MemoFormTool: React.FC<FormToolProps> = ({
 
     dispatch(updateMemoList(memoFormData)); // 리덕스 함수에 id 전달
     setInitialMemoFormData(memoFormData); // 초기값을 수정된 값으로 변경한다
+    showCompleteAlet(); // 수정 완료 메시지
     setToggle(!toggle); // 읽기 모드 전환
+  };
+
+  /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  - 함수 : 수정 confirm 메시지를 보여준다
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+  const showCompleteAlet = () => {
+    Alert.alert(
+      '수정 완료', // 제목
+      '수정이 완료되었습니다', // 메시지
+      [
+        {
+          text: '확인',
+        },
+      ],
+      {cancelable: true}, // 빈 공간 클릭 시 닫힘
+    );
   };
 
   /** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

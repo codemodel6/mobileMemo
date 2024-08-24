@@ -1,4 +1,3 @@
-// store.js
 import {configureStore} from '@reduxjs/toolkit';
 import memoReducer from './slice/memoSlice';
 
