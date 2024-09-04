@@ -4,9 +4,7 @@
 3. android studio의 에뮬레이터를 열어주세요
 4. npm run android 명령어를 통해 react-cli 를 켜주시고 a 버튼을 눌러 안드로이드 에뮬레이터에 프로젝트를 띄어주세요.
 
-
-
-## 실행 환경(사용한 nodejs버전, ios or android 버전)
+## 실행 환경
 - #### node 버전 <br/>
   v20.16.0 (가장 안정적인 현재의 LTS 버전을 사용하였습니다)
 - #### android 버전 <br/>
@@ -20,8 +18,6 @@
   Cores: 6
   Registry: external.system.auto.import.disabled=true
   Non-Bundled Plugins: drawable.importer.pluginId.7658.hack' (0.7)
-
-
 
 ## 구현한 내용
 - 메모장 stylesheet CSS 작업
